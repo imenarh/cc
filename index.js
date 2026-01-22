@@ -20,9 +20,10 @@ function converter() {
         "\nWhat currency would you like to convert into USD: ",
     ).toUpperCase();
 
-    if (!currency === Object.keys(pairs)) {
-      console.log('\Enter a currency ticker from:');
-      console.log(Object.keys(pairs).join(", "));
+    if (!Object.keys(pairs).includes(currency)) {
+      console.log("\nERROR: You entered an unsupported Currency!")
+      console.log('\nEnter a currency ticker from:');
+      console.log(Object.keys(pairs).join(", "), "\n");
       process.exit(0)  
     }
 
@@ -36,14 +37,13 @@ function converter() {
         process.exit(0);
     }
 
-    let amount = input(
-        `\nEnter the amount of ${currency} you want to convert: `,
-    );
+    let amount = input(`\nEnter the amount of ${currency} you want to convert: `);
 
     let converted = Number(amount) * pairs[currency]
 
     console.log(
-        `\n${amount} converted from ${currency} to USD is: ${converted}.\n`);
+        `\n${amount} converted from ${currency} to USD is: ${converted}.\n`,
+    );
 }
 
 converter();
