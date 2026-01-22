@@ -1,21 +1,49 @@
 function converter() {
-    console.log("WELCOME TO CURRENCY CONVERTER!\n")
-    const input = require('sync-input');
-    
-    const currencies = {
+    console.log("\n");
+    console.log("WELCOME TO CURRENCY CONVERTER!\n");
+    const input = require("sync-input");
+
+    const pairs = {
         // exchange rates for currency we have
-        USD: 1,
-        GBP: 1.25,
-        EUR: 1.1,
-        JPY: 0.009,
-        AUD: 0.75,
-        CAD: 0.78,
-        CHF: 1.05
+        GBP: 1.34,
+        CHF: 1.26,
+        EUR: 1.17,
+        CAD: 0.72,
+        AUD: 0.68,
+        JPY: 0.0063,
+        RWF: 0.00069,
+    };
+    console.log("you can convert your USD to:");
+    console.log(Object.keys(pairs).join(", "));
+
+    let currency = input(
+        "\nWhat currency would you like to convert into USD: ",
+    ).toUpperCase();
+
+    if (!currency === Object.keys(pairs)) {
+      console.log('\Enter a currency ticker from:');
+      console.log(Object.keys(pairs).join(", "));
+      process.exit(0)  
     }
-    console.log("you can convert:")
-    console.log(Object.keys(currencies).join(", "))
-    
-    currency = input('What currency would you like to convert: ')
+
+    if (currency === 'USD') {
+        console.log('\nGreat you already have US dollars!');
+        process.exit(0);
+    }
+
+    if (currency === "USD") {
+        console.log("\nGreat you already have US dollars!");
+        process.exit(0);
+    }
+
+    let amount = input(
+        `\nEnter the amount of ${currency} you want to convert: `,
+    );
+
+    let converted = Number(amount) * pairs[currency]
+
+    console.log(
+        `\n${amount} converted from ${currency} to USD is: ${converted}.\n`);
 }
 
-converter()
+converter();
